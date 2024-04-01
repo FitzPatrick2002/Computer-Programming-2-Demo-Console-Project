@@ -1,0 +1,5 @@
+Name: Amundsen
+Second Name: Roald
+Age: 22
+PESEL: 71032094972 
+Gender: Male

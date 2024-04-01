@@ -1,0 +1,12 @@
+list_all -all -order desc -prop name age
+list_all -all -order name desc -prop name age
+list_all -all -prop name age
+
+list_all -all -order age asc -prop name age 
+-> bad comparison error in  compare patients I guess
+
+list_all -i 65013021943
+
+list_all -i 65013021943 -r 
+
+list_all -i 65013021943 -r author: Frau_Engels title: First_treatment
