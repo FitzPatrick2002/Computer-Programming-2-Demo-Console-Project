@@ -1,0 +1,26 @@
+This is a simple program that allows us display patients personal data, their illnesses and reports from the treatment of each illness.
+
+Note: When passing args to switches that are more than one word, we need to use underscores (ex. -prop second_name)
+
+Available commands and switches with which they can be combined:
+list_all -> allows us to display either all data of all patient/patients or only specific data of a single individual. We decide about that using switches. 
+
+list_all -a -order -prop
+list_all -i -r -prop
+
+Switches description
+-a -> takes no args, all patients personal data will be displayed (if no other switches are used)
+-order -> takes one or two arg (asc / desc) (property), patients data will be displayed in ascending or descneding order based on a specific property like. By default it is age. Other available (property) values: name, second_name, pesel, gender.
+
+-i -> takes one argument, pesel of the patient whose data we want to display. When it is the only switch used all personal data of that patient will be displayed
+
+-r -> when used without args, tells the command 'list_all' that we want to print all reports of a specific individual. We can specify which report is to be printed by adding args in a following manner. -r author: authors_name title: reports_title.  
+
+___________________________________________________________________________
+
+
+
+
+
+
+

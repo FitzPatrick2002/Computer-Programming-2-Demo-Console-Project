@@ -35,7 +35,7 @@ bool check_alphabetical_order_of_strings(std::string s1, std::string s2) {
 	char c1 = s1[i];
 	char c2 = s2[i];
 
-	return c1 <= c2;
+	return c1 < c2;
 }
 
 // Function for comparison of patients (eg. Age_1 > Age_2) (listing, etc...)
@@ -66,6 +66,7 @@ bool compare_patients(Patient& p1, Patient& p2, bool ascending, std::string prop
 	else {
 		throw std::exception("Unknown prop provided to function compare_patients()\n");
 	}
+
 
 	if (ascending)
 		return outcome;
@@ -393,6 +394,8 @@ int main() {
 			pat.print_all_data();
 		}*/
 
+		
+
 		std::string user_input;
 		while (user_input != "quit program") {
 			std::getline(std::cin, user_input);
@@ -412,8 +415,9 @@ int main() {
 					switches_with_args[sw]; // In case switch doesn't take any args -> we create a key in the map so as to mark that such switch was passed
 					continue;
 				}
-				std::cout << "sw: " << sw << ": \n";
-				std::cout << "arg: " << temp << "\n";
+				//std::cout << "sw: " << sw << ": \n";
+				//std::cout << "arg: " << temp << "\n";
+
 				switches_with_args[sw].push_back(temp);
 			}
 
@@ -425,41 +429,13 @@ int main() {
 			Command_Base* command = nullptr;
 
 			command = new Command_List(switches_with_args, &all_patients);
-			std::cout << "performing command\n";
+			//std::cout << "performing command\n";
 			command->perform();
 
 		}
 
-		// The old way of handling commands
-		/*std::vector<std::string> available_commands = {"list_all", "list_by_age", "select_patient", "print_data", "quit_program", "help"};
-		std::string command_given = "help";
-
-		while (command_given != "quit_program") {
-			std::cin >> command_given;
-
-			if (std::count(available_commands.begin(), available_commands.end(), command_given)) {
-				std::cout << "Asdf\n";
-				if (command_given == "list_all") {
-					Command_Base* command = new Command_List(all_patients);
-
-					std::vector<std::string> switches = { "-all" };
-
-					std::cout << "Command\n";
-					command->perform(switches);
-					
-				}
-				else if (command_given == "list_by_age") {
-
-				}
-
-
-			}
-			else {
-				std::cout << "Unknown command, please try again\n";
-			}
-		}
-		*/
-
+		// Reset the user input so we don't perform same command accidentaly
+		user_input = "";
 	}
 	catch (std::exception& e) {
 		std::cout << "Exception occured: \n";

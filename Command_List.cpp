@@ -17,20 +17,15 @@ void Command_List::list_sw_all(std::vector<patient_properites_enum> prop_print, 
 
 	// Check if we have to print in a specific order
 	//		If yes sort the this->patients vector with std::qsort or std::sort
-	//		Function passed for compaison will be defined later
+	//		Function passed for comparison will be defined later
 	// If not just go through the this->patients and print the specific properties
 
-	std::cout << "Amount of props to print: " << prop_print.size() << "\n";
-
+	//std::cout << "Amount of props to print: " << prop_print.size() << "\n";
 	if (order_pr == true) {
-		std::cout << "Enum number: " << (int)prop_sort << "\n";
 		std::string prop_to_sort_by = convert_pat_prop_enum_to_str(prop_sort);
-		std::cout << "We are sorting by: " << prop_to_sort_by << "\n\n";
-
 		auto comparison = std::bind(compare_patients, std::placeholders::_1, std::placeholders::_2, asc_pr, prop_to_sort_by);
 		std::sort(this->patients->begin(), this->patients->end(), comparison);
 
-		std::cout << "Sorting done\n";
 	}
 	
 	for (auto& pat : *this->patients) {
@@ -38,7 +33,9 @@ void Command_List::list_sw_all(std::vector<patient_properites_enum> prop_print, 
 			std::string prop_name = convert_pat_prop_enum_to_str(prop);
 			std::cout << prop_name << ": " << pat[prop_name.c_str()] << "\n";
 		}
+		std::cout << "\n";
 	}
+
 }
 
 // Prints a given vector
@@ -70,7 +67,7 @@ void print_vector(std::vector<T>& vec) {
 //		-r 'title: specific report title / date: specific date of adding' -> if no such found give one that has the closest date to the given one
 
 void Command_List::perform() {
-	std::cout << "Entering ->perform()\n";
+	//std::cout << "Entering ->perform()\n";
 
 	// If there is no switches just list the patients
 	if (this->switches_with_args.size() == 0)
@@ -78,20 +75,20 @@ void Command_List::perform() {
 	else {
 		std::vector<std::string> arguments;
 
-		if (this->switches_with_args.find("-all") != switches_with_args.end()) {
+		if (this->switches_with_args.find("-a") != switches_with_args.end()) {
 			bool print_no_rules = true;
 
 			// If size == 1 then it means we have only one switch that being -all
 			if (this->switches_with_args.size() == 1) {
-				std::cout << "There is only one switch\n";
-				arguments = switches_with_args["-all"];
+				//std::cout << "There is only one switch\n";
+				arguments = switches_with_args["-a"];
 
 				if (arguments.size() == 0) {
 					this->list_all();
 					return;
 				}
 				else
-					throw std::exception("Switch -all for the commant list does not take any arguments\n");
+					throw std::exception("Switch -a for the commant list does not take any arguments\n");
 				arguments.clear();
 			}
 			
@@ -101,40 +98,6 @@ void Command_List::perform() {
 
 			//Check if these elements are to be sorted in some kind of an order
 			if (this->switches_with_args.find("-order") != switches_with_args.end()) {
-				/*arguments = switches_with_args["-order"];
-				ordered_print = true;
-				
-				std::cout << "Order args: ";
-				print_vector(arguments);
-
-				// By default we have ascending order of printing
-				// -order takes only zero or one argument, that beigne (asc / desc)
-				if (arguments.size() == 0)
-					ordered_print = true;
-				else {
-					std::vector<std::string>::iterator it;
-
-					//Check if one of the args is demandig descending printing
-					if ((it = std::find(arguments.begin(), arguments.end(), "desc")) != arguments.end()) {
-						ascending_print = false;
-						arguments.erase(it);
-					}
-					else if ((it = std::find(arguments.begin(), arguments.end(), "asc")) != arguments.end()) 
-						arguments.erase(it);
-					
-					arguments.shrink_to_fit();
-					std::cout << "Args -order size: " << arguments.size();
-
-					// If it is specified then check by which property we are supposed to sort the patients
-					if (arguments.size() > 0) {
-						prop_to_sort_by = convert_pat_prop_str_to_enum(arguments[0]);
-
-						if (prop_to_sort_by == patient_properites_enum::error)
-							std::cerr << "Could not read the property by which the enum was supposed to be read: " << arguments[0] << "\n";
-					}
-				}
-				std::cout << "Order set: " << ordered_print << " " << ascending_print << (int)prop_to_sort_by << "\n";
-				*/
 
 				Order_Switch order_sw(ordered_print, ascending_print, prop_to_sort_by);
 				order_sw.set_switch_data(switches_with_args["-order"]);
@@ -144,21 +107,6 @@ void Command_List::perform() {
 			std::vector<patient_properites_enum> props_to_print;
 			// Check if only a specific proeprty (or a list of properties is supposed to be displayed
 			if (switches_with_args.find("-prop") != switches_with_args.end()) {
-				/*
-				arguments = switches_with_args["-prop"];
-
-				if (arguments.size() != 0) {
-					props_to_print.reserve(arguments.size());
-					
-					for (auto prop : arguments)
-						props_to_print.emplace_back(convert_pat_prop_str_to_enum(prop));
-				}
-				else {
-					throw std::exception("Switch -prop for the command list expects at least one argument (name, second_name, age, pesel, gender)\n");
-				}
-
-				std::cout << "Props to print has been set: " << arguments.size() << "\n";
-				*/
 
 				Prop_Switch prop_sw(props_to_print);
 				prop_sw.set_switch_data(switches_with_args["-prop"]);
@@ -178,7 +126,7 @@ void Command_List::perform() {
 			Individual_Patient_Switch i_sw(i_pesel, *this->patients);
 			i_sw.set_switch_data(this->switches_with_args["-i"]);
 
-			// Check if we want to print only specific properties of the patient
+			// Check if we want to print only specific properties (personal data) of the patient
 			std::vector<patient_properites_enum> props_to_print;
 			if (this->switches_with_args.find("-prop") != this->switches_with_args.end()) {
 				Prop_Switch prop_sw(props_to_print);
@@ -192,10 +140,13 @@ void Command_List::perform() {
 				r_sw.set_switch_data(switches_with_args["-r"]);
 			}
 
+			/*
 			std::cout << "Pesel: " << i_pesel << "\n";
 			for (auto& x : props_to_print) {
 				std::cout << convert_pat_prop_enum_to_str(x) << "\n";
 			}
+			*/
+
 			for (auto& x : reports_to_print) {
 				x.print_all_data();
 			}

@@ -10,10 +10,28 @@ Patient::Patient(std::string dir_name) : directory_name(dir_name) {
 }
 
 Patient::Patient(const Patient& p) {
-	this->name = p.name;
-	this->second_name = p.second_name;
+	if (p.get_gender() == "")
+		std::cerr << "When copying patient object with address: " << &p << " has no gender set\n";
+	else
+		this->set_gender(p.get_gender());
 
-	this->set_age(p.age);
+	if (p.get_name() == "")
+		std::cerr << "When copying patient object with address: " << &p << " has no name set\n";
+	else
+		this->set_name(p.get_name());
+
+	if (p.get_second_name() == "")
+		std::cerr << "When copying patient object with address: " << &p << " has no second name set\n";
+	else
+		this->set_second_name(p.get_second_name());
+
+	if (p.get_pesel() == "")
+		std::cerr << "When copying patient object with address: " << &p << " has no pesel set\n";
+	else
+		this->set_pesel(p.get_pesel());
+
+	this->set_age(p.get_age());
+
 }
 
 Patient::~Patient() {
@@ -23,9 +41,12 @@ Patient::~Patient() {
 //Setters and getters
 
 void Patient::print_patient_data() const {
-	std::cout << "Name: " << this->name << "\n";
-	std::cout << "Second Name: " << this->second_name << "\n";
-	std::cout << "Age: " << this->age << "\n";
+	std::cout << "Name: " << this->get_name() << "\n";
+	std::cout << "Second Name: " << this->get_second_name() << "\n";
+	std::cout << "Age: " << this->get_age() << "\n";
+	std::cout << "PESEL: " << this->get_pesel() << "\n";
+	std::cout << "Gender: " << this->get_gender() << "\n\n";
+
 }
 
 void Patient::set_age(int a) {
@@ -74,11 +95,12 @@ std::string Patient::get_gender() const {
 }
 
 void Patient::print_all_data() const {
-	std::cout << "Name: " << this->name << "\n";
+	this->print_patient_data();
+	/*std::cout << "Name: " << this->name << "\n";
 	std::cout << "Second Name: " << this->second_name << "\n";
 	std::cout << "Gender: " << this->gender << "\n";
 	std::cout << "Age: " << this->age << "\n";
-	std::cout << "PESEL: " << this->pesel << "\n";
+	std::cout << "PESEL: " << this->pesel << "\n";*/
 
 	std::cout << "Ongoing ilnesses: \n";
 	for (const auto& illness : this->on_going_illness) 
@@ -135,24 +157,24 @@ void Patient::read_personal_data_from_file(std::string patient_folder_dir) {
 				split_line.push_back(temp);
 
 			if (str_to_lower(split_line[0]) == "name:") {
-				std::string name = merge_vector_strings(split_line, 1, split_line.size());
-				this->set_name(name);
+				std::string n = merge_vector_strings(split_line, 1, split_line.size());
+				this->set_name(n);
 			}
 			else if (str_to_lower(split_line[0]) == "age:") {
-				int age = std::atoi(split_line[1].c_str());
-				this->set_age(age);
+				int a = std::atoi(split_line[1].c_str());
+				this->set_age(a);
 			}
 			else if (str_to_lower(split_line[0]) == "gender:") {
-				std::string gender = split_line[1];
-				this->set_gender(gender);
+				std::string g = split_line[1];
+				this->set_gender(g);
 			}
 			else if (str_to_lower(split_line[0]) == "pesel:") {
-				std::string pesel = merge_vector_strings(split_line, 1, split_line.size());
-				this->set_pesel(pesel);
+				std::string p = merge_vector_strings(split_line, 1, split_line.size());
+				this->set_pesel(p);
 			}
 			else if (str_to_lower(merge_vector_strings(split_line, 0, 2)) == "secondname:") {
-				std::string second_name = merge_vector_strings(split_line, 2, split_line.size());
-				this->set_second_name(second_name);
+				std::string s_n = merge_vector_strings(split_line, 2, split_line.size());
+				this->set_second_name(s_n);
 			}
 			else {
 				throw std::exception("Wrongly set property in one of patients files\n");
@@ -207,11 +229,11 @@ void Patient::read_patient_illnesses(std::string patient_folder_dir) {
 std::string Patient::operator[] (const char* prop) const {
 	std::string str(prop);
 	str = str_to_lower(str);
-	prop = str.c_str();
+	//prop = str.c_str();
 
 	if (str == "name")
 		return this->get_name();
-	else if (str == "second_name" || prop == "second name" || prop == "secondname")
+	else if (str == "second_name" || str == "second name" || str == "secondname")
 		return this->get_second_name();
 	else if (str == "pesel")
 		return this->get_pesel();

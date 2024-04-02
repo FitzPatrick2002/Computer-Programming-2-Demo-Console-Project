@@ -21,5 +21,5 @@ void Prop_Switch::set_switch_data(std::vector<std::string>& arguments) {
 		throw std::exception("Switch -prop for the command list expects at least one argument (name, second_name, age, pesel, gender)\n");
 	}
 
-	std::cout << "Props to print has been set: " << arguments.size() << "\n";
+	//std::cout << "Props to print has been set: " << arguments.size() << "\n";
 }

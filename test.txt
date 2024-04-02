@@ -1,10 +1,10 @@
 Example of commands that can be used (with switches)
 They are accepted after running the program.
 
-list_all -all -order asc -prop name age
-list_all -all -order name desc -prop name age
-list_all -all -prop name age
+list_all -a -order asc -prop name age
+list_all -a -order name desc -prop name age
+list_all -a -prop name age
 
-list_all -all -order age desc -prop name age 
+list_all -a -order age desc -prop name age 
 -> bad comparison error in  compare patients 
 

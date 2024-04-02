@@ -12,16 +12,16 @@ Order_Switch::~Order_Switch() {
 void Order_Switch::set_switch_data(std::vector<std::string>& arguments) {
 	this->ordered_print = true;
 
-	std::cout << "Order args: ";
+	/*std::cout << "Order args: ";
 	// print_vector(arguments);
 
 	// Delete this for
 	for (auto& arg : arguments)
 		std::cout << arg << " ";
-	std::cout << "\n\n";
+	std::cout << "\n\n";*/
 
 	// By default we have ascending order of printing
-	// -order takes only zero or one argument, that beigne (asc / desc)
+	// -order takes only zero, one or two arguments, that being (asc / desc), (propert) by which it is supposed to be sorted
 	if (arguments.size() == 0)
 		ordered_print = true;
 	else {
@@ -36,7 +36,7 @@ void Order_Switch::set_switch_data(std::vector<std::string>& arguments) {
 			arguments.erase(it);
 
 		arguments.shrink_to_fit();
-		std::cout << "Args -order size: " << arguments.size();
+		//std::cout << "Args -order size: " << arguments.size();
 
 		// If it is specified then check by which property we are supposed to sort the patients
 		if (arguments.size() > 0) {
@@ -46,5 +46,5 @@ void Order_Switch::set_switch_data(std::vector<std::string>& arguments) {
 				std::cerr << "Could not read the property by which the enum was supposed to be read: " << arguments[0] << "\n";
 		}
 	}
-	std::cout << "Order set: " << ordered_print << " " << ascending_print << (int)prop_to_sort_by << "\n";
+	//std::cout << "Order set: " << ordered_print << " " << ascending_print << (int)prop_to_sort_by << "\n";
 }
