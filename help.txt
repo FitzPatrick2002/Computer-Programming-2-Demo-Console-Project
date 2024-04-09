@@ -4,9 +4,13 @@ Note: When passing args to switches that are more than one word, we need to use 
 
 Available commands and switches with which they can be combined:
 list_all -> allows us to display either all data of all patient/patients or only specific data of a single individual. We decide about that using switches. 
+If we don;t use any switches both personal data and all the reports of every patient will be printed. Same if we use only list_all
 
+list_ll
 list_all -a -order -prop
 list_all -i -r -prop
+
+
 
 Switches description
 -a -> takes no args, all patients personal data will be displayed (if no other switches are used)
@@ -14,7 +18,9 @@ Switches description
 
 -i -> takes one argument, pesel of the patient whose data we want to display. When it is the only switch used all personal data of that patient will be displayed
 
--r -> when used without args, tells the command 'list_all' that we want to print all reports of a specific individual. We can specify which report is to be printed by adding args in a following manner. -r author: authors_name title: reports_title.  
+-r -> when used without args, tells the command 'list_all' that we want to print all reports of a specific individual. We can specify which report is to be printed by adding args in a following manner. -r author: authors_name title: reports_title. We can each report property only once 
+-r Title: report_01 -> ok
+-r Title: report_01 Title: report2 -> not ok
 
 ___________________________________________________________________________
 

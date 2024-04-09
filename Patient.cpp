@@ -96,19 +96,20 @@ std::string Patient::get_gender() const {
 
 void Patient::print_all_data() const {
 	this->print_patient_data();
-	/*std::cout << "Name: " << this->name << "\n";
-	std::cout << "Second Name: " << this->second_name << "\n";
-	std::cout << "Gender: " << this->gender << "\n";
-	std::cout << "Age: " << this->age << "\n";
-	std::cout << "PESEL: " << this->pesel << "\n";*/
 
 	std::cout << "Ongoing ilnesses: \n";
-	for (const auto& illness : this->on_going_illness) 
-		illness.print_all_data();
+	if (this->on_going_illness.size() == 0)
+		std::cout << "None\n";
+	else
+		for (const auto& illness : this->on_going_illness) 
+			illness.print_all_data();
 
 	std::cout << "Cured illnesses: \n";
-	for (const auto& illness : this->cured_illness)
-		illness.print_all_data();
+	if (this->cured_illness.size() == 0)
+		std::cout << "None\n";
+	else
+		for (const auto& illness : this->cured_illness)
+			illness.print_all_data();
 
 	std::cout << "\n";
 }
@@ -121,6 +122,22 @@ std::vector<Illness>& Patient::acces_on_going_illnesses() {
 
 std::vector<Illness>& Patient::access_cured_illnesses() {
 	return this->cured_illness;
+}
+
+std::vector<Illness> Patient::access_all_illnesses() {
+	int size_1 = this->on_going_illness.size();
+	int size_2 = this->cured_illness.size();
+
+	std::vector<Illness> all;
+	all.reserve(size_1 + size_2);
+
+	for (int i = 0; i < size_1; i++)
+		all.emplace_back(this->on_going_illness[i]);
+
+	for (int i = 0; i < size_2; i++)
+		all.emplace_back(this->cured_illness[i]);
+		
+	return all;
 }
 
 void Patient::push_ongoing_illness(Illness& ill) {

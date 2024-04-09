@@ -36,8 +36,9 @@ public:
 	// It just sorts the given vector and then prints it
 	void list_by_age(bool ascending = true) const;
 
-	
 	void list_sw_all(std::vector<patient_properites_enum> prop_print, bool order_pr = false, bool asc_pr = true, patient_properites_enum prop_sort = patient_properites_enum::age);
+
+	void list_sw_i(std::vector<Report>& reports_to_print, std::vector<patient_properites_enum> prop_print, std::string pesel);
 
 	// Used insid ->perform() for printing according to switches arguments
 	// Used for -all switch 

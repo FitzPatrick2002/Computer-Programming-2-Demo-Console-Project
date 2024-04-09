@@ -38,9 +38,47 @@ void Command_List::list_sw_all(std::vector<patient_properites_enum> prop_print, 
 
 }
 
+// Function for printing individual data after using list -i ...
+// 1. Find that individual based on the pesel number
+// 2. Print its personal properties if they are specified
+// 3. Print all the specified reports
+
+void Command_List::list_sw_i(std::vector<Report>& reports_to_print, std::vector<patient_properites_enum> prop_print, std::string pesel) {
+	Patient* pat = nullptr;
+
+	// 1. Find that patient that has been specified
+	for (auto& p : *(this->patients)) {
+		if (p.get_pesel() == pesel) {
+			pat = &p;
+			break;
+		}
+	}
+
+	if (pat == nullptr) {
+		std::cerr << "Patient with such pesel: " << pesel << " not found\n";
+		return;
+	}
+	else {
+		// 2. Print the personal data
+		for (auto& prop : prop_print) {
+			std::string prop_str = convert_pat_prop_enum_to_str(prop);
+			std::cout << prop_str << ": " << (*pat)[prop_str.c_str()] << "\n";
+		}
+		std::cout << "\n";
+
+		// 3. Print the specified reports
+		std::cout << "Reports found: \n";
+		for (Report& rep : reports_to_print) {
+			rep.print_all_data();
+			std::cout << "\n";
+		}
+		std::cout << "\n";
+	}
+}
+
 // Prints a given vector
 // Uses the stream << 
-// NOTE: Vectors with elements of type that jas no overloaded << operator will cause an error
+// NOTE: Vectors with elements of type that has no overloaded << operator will cause an error
 
 template <class T>
 void print_vector(std::vector<T>& vec) {
@@ -146,10 +184,7 @@ void Command_List::perform() {
 				std::cout << convert_pat_prop_enum_to_str(x) << "\n";
 			}
 			*/
-
-			for (auto& x : reports_to_print) {
-				x.print_all_data();
-			}
+			this->list_sw_i(reports_to_print, props_to_print, i_pesel);
 		}
 	}
 }

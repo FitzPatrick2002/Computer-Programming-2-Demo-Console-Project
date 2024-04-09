@@ -67,6 +67,8 @@ public:
 
 	std::vector<Illness>& access_cured_illnesses();
 
+	std::vector<Illness> access_all_illnesses();
+
 	// Printing data
 
 	void print_all_data() const;

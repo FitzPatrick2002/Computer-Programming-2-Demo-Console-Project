@@ -105,7 +105,7 @@ void Report::read_report_file(std::string file_path){
 				this->set_author(auth);
 			}
 			else if (str_to_lower(split_line[0]) == "date:") {
-				std::string date = split_line[0];
+				std::string date = split_line[1];
 				this->set_date(date);
 			}
 			else if (str_to_lower(split_line[0]) == "title:") {
