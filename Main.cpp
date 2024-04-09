@@ -379,7 +379,7 @@ void create_command(std::string command_name, Command_Base* comm, std::map<std::
 int main() {
 
 	try {
-		//NOTE: This could be actually takena as an argument during opening of the .exe after all that program is just a way of manging some files and that is all...
+		//NOTE: This could be actually taken as an argument during opening of the .exe after all that program is just a way of manging some files and that is all...
 		std::string all_patients_directory = "Patients\\";
 		std::vector<Patient> all_patients;
 
@@ -394,11 +394,18 @@ int main() {
 			pat.print_all_data();
 		}*/
 
-		
+		// List of available commands
+		std::vector<std::string> available_command_names = { "list", "quit program", "add", "delete"};
 
+		Command_Base* command = nullptr;
 		std::string user_input;
 		while (user_input != "quit program") {
+			std::cout << "User input: ";
 			std::getline(std::cin, user_input);
+
+			// If there was no input just pass
+			if (user_input == "")
+				continue;
 
 			std::stringstream ss(user_input);
 			std::string temp;
@@ -426,16 +433,34 @@ int main() {
 			// 2. Provide it with (for now) all available data (all_patients vector)
 			// 3. ->perform() the command. Logic inside perform() does everything for us
 
-			Command_Base* command = nullptr;
+			command = nullptr;
+			if (std::find(available_command_names.begin(), available_command_names.end(), command_name) != available_command_names.end()) {
+				
+				if (command_name == "list") {
+					command = new Command_List(switches_with_args, &all_patients);
+					command->perform();
 
-			command = new Command_List(switches_with_args, &all_patients);
-			//std::cout << "performing command\n";
-			command->perform();
+					delete command;
+				}
+				else if (command_name == "add") {
+					std::cerr << "Not implemented yet\n";
+				}
+				else if (command_name == "delete") {
+					std::cerr << "Not implemented yet\n";
+				}
+				
+				
+			}
+			else {
+				std::cerr << "Unknown command used: " << command_name << "\n";
+				std::cerr << "List of available commands: \n";
+				for (const auto& c : available_command_names)
+					std::cerr << c << "\n";
+
+				std::cerr << "\n";
+			}
 
 		}
-
-		// Reset the user input so we don't perform same command accidentaly
-		user_input = "";
 	}
 	catch (std::exception& e) {
 		std::cout << "Exception occured: \n";
