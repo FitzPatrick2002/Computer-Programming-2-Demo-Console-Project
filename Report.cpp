@@ -7,6 +7,14 @@ Report::Report(std::string fl) : file_location(fl) {
 	date_of_adding = "";
 }
 
+Report::Report(const Report& rep) {
+	this->content = rep.content;
+	this->title = rep.title;
+	this->author = rep.author;
+	this->date_of_adding = rep.date_of_adding;
+	this->file_location = rep.file_location;
+}
+
 Report::~Report() {
 
 }

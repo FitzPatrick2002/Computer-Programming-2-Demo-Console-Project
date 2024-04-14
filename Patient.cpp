@@ -6,7 +6,17 @@ Patient::Patient(std::string n, std::string sn, int a) : name(n), second_name(sn
 }
 
 Patient::Patient(std::string dir_name) : directory_name(dir_name) {
+	this->directory_name = dir_name;
+	this->read_personal_data_from_file(dir_name);
+	this->read_patient_illnesses(dir_name);
+}
 
+Patient::Patient() {
+	this->directory_name = "";
+	this->name = "";
+	this->second_name = "";
+	this->age = 0;
+	this->gender = "";
 }
 
 Patient::Patient(const Patient& p) {
@@ -30,7 +40,30 @@ Patient::Patient(const Patient& p) {
 	else
 		this->set_pesel(p.get_pesel());
 
-	this->set_age(p.get_age());
+	if(p.get_age() == 0)
+		std::cerr<< "When copying patient object with address: " << &p << " has age set to zero\n";
+	else
+		this->set_age(p.get_age());
+
+	if (p.directory_name == "")
+		std::cerr << "When copying patient object with address: " << &p << " no directory_name set\n";
+	else
+		this->directory_name = p.directory_name;
+
+
+	// Copy the illnesses
+
+	int cured_ill_amount = p.cured_illness.size();
+	this->cured_illness.reserve(cured_ill_amount);
+
+	int on_going_amount = p.on_going_illness.size();
+	this->on_going_illness.reserve(on_going_amount);
+
+	for (auto& ill : p.cured_illness)
+		this->cured_illness.emplace_back(ill);
+	
+	for (auto& ill : p.on_going_illness)
+		this->on_going_illness.emplace_back(ill);
 
 }
 
@@ -70,6 +103,28 @@ void Patient::set_pesel(std::string p) {
 
 void Patient::set_gender(std::string g) {
 	this->gender = g;
+}
+
+void Patient::set_prop_based_on_string_name(std::string name, std::string value) {
+
+	for (auto& e : name)
+		e = std::tolower(e);
+
+	if (name == "name")
+		this->set_name(value);
+	else if (name == "second name" || name == "second_name" || name == "secondname")
+		this->set_second_name(value);
+	else if (name == "age") {
+		int a = std::atoi(value.c_str());
+		this->set_age(a);
+	}
+	else if (name == "pesel")
+		this->set_pesel(value);
+	else if (name == "gender")
+		this->set_gender(value);
+	else
+		std::cerr << "Could not set value of the patient property named: " << name << ". No such property exist.\n";
+
 }
 
 //Getters
@@ -140,6 +195,8 @@ std::vector<Illness> Patient::access_all_illnesses() {
 	return all;
 }
 
+// Misc
+
 void Patient::push_ongoing_illness(Illness& ill) {
 	this->on_going_illness.push_back(ill);
 }
@@ -147,6 +204,8 @@ void Patient::push_ongoing_illness(Illness& ill) {
 void Patient::push_cured_illness(Illness& ill) {
 	this->cured_illness.push_back(ill);
 }
+
+// Reading from file
 
 void Patient::read_personal_data_from_file(std::string patient_folder_dir) {
 	if (!patient_folder_dir.empty())
@@ -239,6 +298,38 @@ void Patient::read_patient_illnesses(std::string patient_folder_dir) {
 		else
 			this->cured_illness.push_back(illness);
 	}
+}
+
+// Saving current state into file
+
+void Patient::save_personal_data_to_file() {
+
+	//Change the '\\' into '/'
+	for (auto& c : this->directory_name)
+		if (c == '\\')
+			c = '/';
+
+	std::ofstream personal_file(this->directory_name + "/Personal_Data.txt");
+
+	if (personal_file.is_open()) {
+		std::string new_name = "Name: " + this->name + "\n";;
+		std::string new_second_name = "Second Name: " + this->second_name + "\n";
+		std::string new_age = "Age: " + std::to_string(this->age) + "\n";
+		std::string new_pesel = "PESEL: " + this->pesel + "\n";
+		std::string new_gender = "Gender: " + this->gender + "\n";
+
+		personal_file << new_name.c_str();
+		personal_file << new_second_name.c_str();
+		personal_file << new_age.c_str();
+		personal_file << new_pesel.c_str();
+		personal_file << new_gender.c_str();
+
+		personal_file.close();
+	}
+	else {
+		std::cerr << "Could not open the file: " << this->directory_name + "Personal_Data.txt, in order to save new Patient data\n";
+	}
+
 }
 
 // Overloads

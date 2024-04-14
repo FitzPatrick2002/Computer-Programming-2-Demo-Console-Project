@@ -12,14 +12,6 @@ Order_Switch::~Order_Switch() {
 void Order_Switch::set_switch_data(std::vector<std::string>& arguments) {
 	this->ordered_print = true;
 
-	/*std::cout << "Order args: ";
-	// print_vector(arguments);
-
-	// Delete this for
-	for (auto& arg : arguments)
-		std::cout << arg << " ";
-	std::cout << "\n\n";*/
-
 	// By default we have ascending order of printing
 	// -order takes only zero, one or two arguments, that being (asc / desc), (propert) by which it is supposed to be sorted
 	if (arguments.size() == 0)

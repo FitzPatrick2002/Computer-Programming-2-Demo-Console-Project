@@ -26,6 +26,8 @@ public:
 
 	Illness(std::string f_path);
 
+	Illness(const Illness &ill);
+
 	~Illness();
 
 	// Getters

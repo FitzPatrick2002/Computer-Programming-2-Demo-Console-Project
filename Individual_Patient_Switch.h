@@ -6,10 +6,9 @@
 
 #include <regex>
 
-// Responsible for setting the following kopitons in the for es. Command_List for printing:
+// Responsible for setting the following kopitons in the for ex. Command_List for printing:
 // Setting the pesel of the desired patient -> also a reference to the object representing the patient
 // Also checks if such patient exists at all
-
 
 class Individual_Patient_Switch : public Base_Switch {
 private:

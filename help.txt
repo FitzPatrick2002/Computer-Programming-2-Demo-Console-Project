@@ -6,7 +6,7 @@ Available commands and switches with which they can be combined:
 list_all -> allows us to display either all data of all patient/patients or only specific data of a single individual. We decide about that using switches. 
 If we don;t use any switches both personal data and all the reports of every patient will be printed. Same if we use only list_all
 
-list_ll
+list_all
 list_all -a -order -prop
 list_all -i -r -prop
 

@@ -12,6 +12,8 @@
 #include "Command_Base.h"
 //#include "Patient.h"
 #include "Command_List.h"
+#include "Command_Add.h"
+#include "Change_Command.h"
 
 using u_int = unsigned int;
 namespace fs = std::filesystem;
@@ -342,7 +344,6 @@ void download_all_patients(std::string patients_directory, std::vector<Patient>&
 
 	all_patients.clear();
 	all_patients.shrink_to_fit();
-
 	all_patients.reserve(patients_amount);
 
 	int i = 0;
@@ -395,7 +396,7 @@ int main() {
 		}*/
 
 		// List of available commands
-		std::vector<std::string> available_command_names = { "list", "quit program", "add", "delete"};
+		std::vector<std::string> available_command_names = { "list", "quit program", "add", "change", "delete"};
 
 		Command_Base* command = nullptr;
 		std::string user_input;
@@ -443,7 +444,16 @@ int main() {
 					delete command;
 				}
 				else if (command_name == "add") {
-					std::cerr << "Not implemented yet\n";
+					command = new Command_Add(&all_patients, switches_with_args, all_patients_directory);
+					command->perform();
+
+					delete command;
+				}
+				else if (command_name == "change") {
+					command = new Change_Command(switches_with_args, &all_patients);
+					command->perform();
+
+					delete command;
 				}
 				else if (command_name == "delete") {
 					std::cerr << "Not implemented yet\n";

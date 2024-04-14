@@ -27,11 +27,13 @@ private:
 
 public:
 
-	Patient(std::string n = "-", std::string sn = "-", int a = 0);
+	Patient(std::string n, std::string sn, int a);
 
 	Patient(std::string dir_name);
 
 	Patient(const Patient& p);
+	
+	Patient();
 
 	~Patient();
 
@@ -48,6 +50,8 @@ public:
 	void set_pesel(std::string p);
 
 	void set_gender(std::string g);
+
+	void set_prop_based_on_string_name(std::string name, std::string value);
 
 	//Getters
 
@@ -84,6 +88,10 @@ public:
 	void read_personal_data_from_file(std::string patient_folder_dir = "");
 
 	void read_patient_illnesses(std::string patient_folder_dir = "");
+
+	// Saving succrent state of the Patient into file
+
+	void save_personal_data_to_file() ;
 
 	// Overloads
 

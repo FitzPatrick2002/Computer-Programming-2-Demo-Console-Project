@@ -18,7 +18,7 @@ class Command_List : public Command_Base {
 protected:
 
 	std::vector<Patient>* patients;
-	Patient* individual_pat; //If we were to operate on a single instance of a patient we store it here
+	//Patient* individual_pat; //If we were to operate on a single instance of a patient we store it here
 
 	std::map<std::string, std::vector<std::string>>& switches_with_args;
 

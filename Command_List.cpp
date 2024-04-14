@@ -1,6 +1,6 @@
 #include "Command_List.h"
 
-Command_List::Command_List(std::map<std::string, std::vector<std::string>>& swa, std::vector<Patient>* pat_vec_ptr) : Command_Base(), switches_with_args(swa), individual_pat(nullptr) {
+Command_List::Command_List(std::map<std::string, std::vector<std::string>>& swa, std::vector<Patient>* pat_vec_ptr) : Command_Base(), switches_with_args(swa){
 	patients = pat_vec_ptr;
 }
 

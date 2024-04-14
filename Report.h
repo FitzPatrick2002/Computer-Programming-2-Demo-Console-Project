@@ -26,6 +26,8 @@ public:
 
 	Report(std::string fl);
 
+	Report(const Report& rep);
+
 	Report();
 
 	~Report();

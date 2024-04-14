@@ -10,6 +10,38 @@ Illness::Illness(std::string f_path) : folder_path(f_path) {
 	this->status = true;
 }
 
+/*
+bool status;
+	std::string folder_path;
+
+	std::string name;
+	std::string description;
+
+	std::vector<std::pair<std::string, std::string>> duration_history;
+	std::vector<Report> reports_history;
+*/
+
+Illness::Illness(const Illness& ill) {
+
+	this->status = ill.status;
+	this->name = ill.name;
+	this->description = ill.description;
+
+	// Copy the duration history
+	int dur_hist_len = ill.duration_history.size();
+	this->duration_history.reserve(dur_hist_len);
+
+	for (auto& span : ill.duration_history)
+		this->duration_history.emplace_back(span);
+		
+	// Copy the reports history
+	int reports_amount = ill.reports_history.size();
+	this->reports_history.reserve(reports_amount);
+
+	for (auto& rep : ill.reports_history)
+		this->reports_history.emplace_back(rep);
+}
+
 Illness::~Illness() {
 
 }
