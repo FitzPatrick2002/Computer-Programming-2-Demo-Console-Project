@@ -390,11 +390,6 @@ int main() {
 		//download_patients_data(all_patients_directory, all_patients);
 		download_all_patients(all_patients_directory, all_patients);
 
-		//As a test print all that downloaded data
-		/*for (const auto& pat : all_patients) {
-			pat.print_all_data();
-		}*/
-
 		// List of available commands
 		std::vector<std::string> available_command_names = { "list", "quit program", "add", "change", "delete"};
 

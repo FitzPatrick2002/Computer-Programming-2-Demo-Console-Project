@@ -20,7 +20,6 @@ private:
 	std::string date_of_adding;
 
 	std::string content;
-	
 
 public:
 
@@ -68,6 +67,10 @@ public:
 	// Downloading data from file
 
 	void read_report_file(std::string file_path="");
+
+	// Saving data to file
+
+	void save_current_data();
 };
 
 #endif

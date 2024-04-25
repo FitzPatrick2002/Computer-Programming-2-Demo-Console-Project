@@ -132,3 +132,38 @@ void Report::read_report_file(std::string file_path){
 	else
 		std::cerr << "Could not open the reports path for an illness. Path: " << file_path << "\n";
 }
+
+// Saving data to file
+
+void Report::save_current_data() {
+
+	if (this->file_location != "") {
+		std::ofstream file;
+
+		file.open(this->file_location, std::ios::out | std::ios::trunc);
+
+		if (file.is_open()) {
+			std::string input = "";
+
+			input = "Title: " + this->get_title() + "\n";
+			file << input;
+
+			input = "Author: " + this->get_author() + "\n";
+			file << input;
+
+			input = "Date: " + this->get_date() + "\n";
+			file << input;
+
+			input = this->get_report_content() + "\n";
+			file << "\n" << input;
+
+			file.close();
+		}
+		else
+			std::cerr << "Could not open the file: " << this->file_location << " in order to save report of title: "<< this->get_title() << "\n";
+
+	}
+	else
+		std::cerr << "File for saving the report of title: " << this->get_title() << " is not set\n";
+
+}

@@ -25,7 +25,7 @@ public:
 
 	void change_specific_personal_data(std::vector<patient_properites_enum>& props_to_change, std::string pesel);
 
-	void change_specific_report(std::vector<Report> report, std::string pesel);
+	void change_reports(std::vector<Report*> report, std::string pesel);
 
 	void perform();
 };

@@ -65,6 +65,10 @@ public:
 
 	std::string get_gender() const;
 
+	Illness get_illness_from_on_going(int i) const;
+
+	Illness get_illness_from_cured(int i) const;
+
 	// Accessors
 
 	std::vector<Illness>& acces_on_going_illnesses();
@@ -72,6 +76,11 @@ public:
 	std::vector<Illness>& access_cured_illnesses();
 
 	std::vector<Illness> access_all_illnesses();
+
+	Illness& access_illness_from_on_going(int i);
+
+	Illness& access_Illness_from_cured(int i);
+
 
 	// Printing data
 

@@ -149,6 +149,14 @@ std::string Patient::get_gender() const {
 	return this->gender;
 }
 
+Illness Patient::get_illness_from_on_going(int i) const {
+	return this->on_going_illness[i];
+}
+
+Illness Patient::get_illness_from_cured(int i) const {
+	return this->cured_illness[i];
+}
+
 void Patient::print_all_data() const {
 	this->print_patient_data();
 
@@ -193,6 +201,14 @@ std::vector<Illness> Patient::access_all_illnesses() {
 		all.emplace_back(this->cured_illness[i]);
 		
 	return all;
+}
+
+Illness& Patient::access_illness_from_on_going(int i) {
+	return this->on_going_illness[i];
+}
+
+Illness& Patient::access_Illness_from_cured(int i) {
+	return this->cured_illness[i];
 }
 
 // Misc

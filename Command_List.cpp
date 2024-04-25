@@ -172,9 +172,10 @@ void Command_List::perform() {
 			}
 
 			std::vector<Report> reports_to_print;
+			std::vector<Report*> dummy;
 			// Check if the -r switch has been used (to print the reports)
 			if (this->switches_with_args.find("-r") != this->switches_with_args.end()) {
-				Report_Switch r_sw(i_pesel, *this->patients, reports_to_print);
+				Report_Switch r_sw(i_pesel, *this->patients, reports_to_print, dummy);
 				r_sw.set_switch_data(switches_with_args["-r"]);
 			}
 
