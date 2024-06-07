@@ -21,7 +21,11 @@ public:
 
 	~Individual_Patient_Switch();
 
+	//It just checks whether pesel is okay and patient with such pesel exist
 	virtual void set_switch_data(std::vector<std::string>& arguments);
+
+	// Does the same but also sets a pointer to this particualr patient
+	virtual void set_switch_data(std::vector<std::string>& arguemnts, Patient*& pat);
 
 };
 

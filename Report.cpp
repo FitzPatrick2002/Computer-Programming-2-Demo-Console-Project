@@ -15,6 +15,10 @@ Report::Report(const Report& rep) {
 	this->file_location = rep.file_location;
 }
 
+Report::Report() {
+
+}
+
 Report::~Report() {
 
 }
@@ -69,6 +73,11 @@ void Report::set_date(std::string d) {
 void Report::set_content(std::string c) {
 	this->content = c;
 }
+
+void Report::set_file_location(std::string l) {
+	this->file_location = l;
+}
+
 
 void Report::append_content(std::string s) {
 	this->content += s;

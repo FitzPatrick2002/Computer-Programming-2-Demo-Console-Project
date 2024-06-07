@@ -1,8 +1,5 @@
-Title: First treatment
-Author: Frau Engels
+Title: Treatment
+Author: Alex
 Date: 18-02-1802
 
-To be fairly ohnest I have no idea why do I have to use english in this report.
-Alle leute wissen, dass die Deutsche Sprache, ist hoherer als andere Sprachen.
-Ich bereue diesen Verlust.
-Aber der Patient hat es durchgemacht, das klingt gut. Zumindest fur ihn...
+Sed vel libero quis metus pharetra luctus sed eget diam. In dui dui, tristique non dolor id, mollis auctor libero. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.

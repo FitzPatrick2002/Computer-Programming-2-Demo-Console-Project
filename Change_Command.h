@@ -7,7 +7,6 @@
 #include "Prop_Switch.h"
 #include "Report_Switch.h"
 
-
 #include <map>
 
 class Change_Command : public Command_Base {

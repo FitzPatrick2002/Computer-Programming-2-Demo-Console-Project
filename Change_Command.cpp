@@ -38,7 +38,6 @@ void Change_Command::change_specific_personal_data(std::vector<patient_properite
 }
 
 void Change_Command::change_reports(std::vector<Report*> reports, std::string pesel) {
-	std::cout << "Reports found num : " << reports.size() << "\n";
 
 	// 1. Iterate through the reports that has been found
 	//		1.1 Find to which illness this report belongs. Get a refernce / pointer to this illness -->> ALready done by the Report_Switch
@@ -91,7 +90,8 @@ void Change_Command::change_reports(std::vector<Report*> reports, std::string pe
 			fields_vals[i] = val;
 		}
 
-		std::stringstream ss;
+		std::cout << rep_fields[rep_fields.size() - 1] << "\n";
+		std::stringstream ss("");
 		while (true) {
 			std::string val = "-";
 			std::getline(std::cin, val);
@@ -100,9 +100,13 @@ void Change_Command::change_reports(std::vector<Report*> reports, std::string pe
 				break;
 
 			ss << val;
+			ss << "\n";
 		}
 
-		fields_vals[3] = ss.str();
+		std::cout << "ss = " << ss.str() << "\n";
+
+		if (ss.str() != "");
+			fields_vals[3] = ss.str();
 
 		// Now check which properties are to be changed and saved
 

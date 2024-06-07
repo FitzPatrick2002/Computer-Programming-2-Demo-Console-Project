@@ -1,0 +1,3 @@
+Name: Ebola
+Status: cured
+Duration: 19.06.1999--

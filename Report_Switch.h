@@ -8,6 +8,7 @@
 
 // Report switch decides which reports are to be printed
 // It is given the pesel of the desired patient and list of properties (for ex. author) that it's report are to fullfill in order to be printed
+// This switch is solely for finding stuff, not modyfying or changing or adding...
 
 class Report_Switch : public Base_Switch {
 private:

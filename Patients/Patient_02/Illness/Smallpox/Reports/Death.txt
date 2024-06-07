@@ -1,7 +1,5 @@
-Title: Patient kinda died today
-Author: Aleksander Solnierzycyn vol.2
+Title: Pateint is dead
+Author: Timmy
 Date: 15-02-1999
 
-Peter has been fetched to us about three days ago.
-His status was stable yet he wasn't as talkative as a few days earlier.
-For now he is waiting for the diagnosis.
+Sed vel libero quis metus pharetra luctus sed eget diam. In dui dui, tristique non dolor id, mollis auctor libero. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.

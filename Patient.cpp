@@ -127,6 +127,10 @@ void Patient::set_prop_based_on_string_name(std::string name, std::string value)
 
 }
 
+void Patient:: set_directory_name(std::string str) {
+	this->directory_name = str;
+}
+
 //Getters
 
 std::string Patient::get_name() const {
@@ -147,6 +151,10 @@ std::string Patient::get_pesel() const {
 
 std::string Patient::get_gender() const {
 	return this->gender;
+}
+
+std::string Patient::get_directory_name() const {
+	return this->directory_name;
 }
 
 Illness Patient::get_illness_from_on_going(int i) const {

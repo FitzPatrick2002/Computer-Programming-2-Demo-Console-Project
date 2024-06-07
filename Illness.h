@@ -28,6 +28,9 @@ public:
 
 	Illness(const Illness &ill);
 
+	// Used for the first time when we were adding a new illness to already existing patient
+	Illness(std::string name, std::string desc, std::pair<std::string, std::string> d_h, std::string folder_p);
+
 	~Illness();
 
 	// Getters
@@ -40,6 +43,8 @@ public:
 
 	Report get_report(int i) const;
 
+	std::string get_path() const;
+
 	// Setters
 
 	//NOTE: Add some control for the name for ex. such illness must exist and be in the data base or smth. Description must be at least 10 characters long. etc...
@@ -50,9 +55,13 @@ public:
 
 	void set_status(bool st);
 
+	void set_path(std::string p);
+
 	// Accessors
 
 	std::vector<Report>& access_report_history();
+
+	std::vector<std::pair<std::string, std::string>>& access_duration_history();
 
 	// Modifications of duration_hisotry and reports_history
 

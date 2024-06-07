@@ -1,0 +1,4 @@
+Name: Smallpox
+Status: cured
+Duration: 11-02-1781 : 01-06-1793
+10-10-1810 : 11-03-1812

@@ -44,3 +44,28 @@ void Individual_Patient_Switch::set_switch_data(std::vector<std::string>& argume
 			std::cerr << "Given Pesel is not valid: " << given_pesel << " Error when using -i switch\n";
 	}
 }
+
+void Individual_Patient_Switch::set_switch_data(std::vector<std::string>& arguments, Patient*& pat_ptr) {
+	
+	if (arguments.size() != 1) {
+		std::cerr << "Switch -i takes always exactly one argument, that is the pesel of the patient\n";
+	}
+	else {
+		// Check if PESEL is in correct form
+		std::string given_pesel = arguments[0];
+		if (check_if_pesel_correct(given_pesel)) {
+
+			// Check if patient with such pesel exist
+			// If so end the function
+			for (const auto& pat : all_patients)
+				if (pat.get_pesel() == given_pesel) {
+					this->i_pesel = given_pesel;
+					pat_ptr = const_cast<Patient*>(&pat);
+					return;
+				}
+			std::cerr << "None patient posses given pesel: " << given_pesel << "\n";
+		}
+		else
+			std::cerr << "Given Pesel is not valid: " << given_pesel << " Error when using -i switch\n";
+	}
+}

@@ -58,6 +58,8 @@ public:
 
 	void set_content(std::string c);
 
+	void set_file_location(std::string l);
+
 	void append_content(std::string s);
 
 	// Printing data

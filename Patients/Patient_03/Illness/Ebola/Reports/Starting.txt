@@ -1,7 +1,5 @@
 Title: Beginning of the illness
-Author: Aleksander Solnierzycyn
+Author: Jake
 Date: 15-02-1802
 
-Peter has been fetched to us about three days ago.
-His status was stable yet he wasn't as talkative as a few days earlier.
-For now he is waiting for the diagnosis.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit, tellus at tincidunt tincidunt, sapien nunc ornare sem, a suscipit nibh orci in orci. Cras non nibh pulvinar, pulvinar arcu vel, tempus diam. Nulla condimentum magna suscipit accumsan tempus. Sed vel libero quis metus pharetra luctus sed eget diam. In dui dui, tristique non dolor id, mollis auctor libero. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.

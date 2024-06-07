@@ -39,7 +39,7 @@ bool date_earlier_than(std::string& date_1, std::string date_2) {
 		}
 	}
 	else
-		std::cerr << "Given two strings are not dates. Can't say which happened earlier";
+		std::cerr << "Given two strings are not dates. Can't say which happened earlier\n";
 	
 	return false;
 }

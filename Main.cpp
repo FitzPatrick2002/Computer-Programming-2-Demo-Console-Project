@@ -14,6 +14,7 @@
 #include "Command_List.h"
 #include "Command_Add.h"
 #include "Change_Command.h"
+#include "Delete_Command.h"
 
 using u_int = unsigned int;
 namespace fs = std::filesystem;
@@ -28,11 +29,8 @@ bool check_alphabetical_order_of_strings(std::string s1, std::string s2) {
 		return true;
 
 	int i = 0;
-	while (s1[i] == s2[i]) {
-		std::cout << "Comparing: " << s1[i] << s2[i] << "\n";
+	while (s1[i] == s2[i]) 
 		i++;
-
-	}
 
 	char c1 = s1[i];
 	char c2 = s2[i];
@@ -451,10 +449,11 @@ int main() {
 					delete command;
 				}
 				else if (command_name == "delete") {
-					std::cerr << "Not implemented yet\n";
+					command = new Delete_Command(&all_patients, switches_with_args);
+					command->perform();
+
+					delete command;
 				}
-				
-				
 			}
 			else {
 				std::cerr << "Unknown command used: " << command_name << "\n";

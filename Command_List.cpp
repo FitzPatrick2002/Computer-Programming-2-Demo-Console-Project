@@ -27,6 +27,12 @@ void Command_List::list_sw_all(std::vector<patient_properites_enum> prop_print, 
 		std::sort(this->patients->begin(), this->patients->end(), comparison);
 
 	}
+
+	// If user has not specified what is to be printed, print everything...
+	if (prop_print.size() == 0) {
+		this->list_all();
+		return;
+	}
 	
 	for (auto& pat : *this->patients) {
 		for (auto& prop : prop_print) {

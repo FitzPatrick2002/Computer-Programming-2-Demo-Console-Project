@@ -10,6 +10,15 @@ Illness::Illness(std::string f_path) : folder_path(f_path) {
 	this->status = true;
 }
 
+// Used for the first time when we were adding a new illness to already existing patient
+Illness::Illness(std::string name, std::string desc, std::pair<std::string, std::string> d_h, std::string folder_p) {
+	this->name = name;
+	this->description = desc;
+	this->duration_history.push_back(d_h);
+	this->folder_path = folder_p;
+
+}
+
 /*
 bool status;
 	std::string folder_path;
@@ -26,6 +35,7 @@ Illness::Illness(const Illness& ill) {
 	this->status = ill.status;
 	this->name = ill.name;
 	this->description = ill.description;
+	this->folder_path = ill.folder_path;
 
 	// Copy the duration history
 	int dur_hist_len = ill.duration_history.size();
@@ -65,6 +75,11 @@ Report Illness::get_report(int i) const {
 		return this->reports_history[i];
 }
 
+std::string Illness::get_path() const {
+	return this->folder_path;
+}
+
+
 // Setters
 
 //NOTE: Add some control for the name for ex. such illness must exist and be in the data base or smth. Description must be at least 10 characters long. etc...
@@ -81,11 +96,20 @@ void Illness::set_status(bool st) {
 	this->status = st;
 }
 
+void Illness::set_path(std::string p) {
+	this->folder_path = p;
+}
+
 // Accessors
 
 std::vector<Report>& Illness::access_report_history() {
 	return this->reports_history;
 }
+
+std::vector<std::pair<std::string, std::string>>& Illness::access_duration_history() {
+	return this->duration_history;
+}
+
 
 // Modifications of duration_hisotry and reports_history
 
@@ -145,9 +169,13 @@ void Illness::print_all_data() const {
 }
 
 void Illness::read_general_data(std::string path_to_illness_folder) {
-	if(!path_to_illness_folder.empty())
+	if (!path_to_illness_folder.empty()) {
 		if (this->folder_path != path_to_illness_folder)
 			this->folder_path = path_to_illness_folder;
+	}
+	else
+		this->folder_path = path_to_illness_folder; // If there was no path set so just set it
+		
 
 	std::string general_path;
 	if(!this->folder_path.empty())
@@ -190,7 +218,7 @@ void Illness::read_general_data(std::string path_to_illness_folder) {
 				// Do the matches with REGEX
 				std::string both_dates = merge_vector_strings(split_line, 1, split_line.size());
 
-				std::string string_format = "(\\d\\d-\\d\\d-\\d{4})\\s*[:-~]\\s*(\\d\\d-\\d\\d-\\d{4}|-)";
+				std::string string_format = "(\\d{2}[.-]\\d{2}[.-]\\d{4})\\s*[:~-]\\s*(\\d{2}[.-]\\d{2}[-.]\\d{4}|-)";
 				std::regex date_reg(string_format);
 				std::smatch match;
 

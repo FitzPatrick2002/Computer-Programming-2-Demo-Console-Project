@@ -53,6 +53,8 @@ public:
 
 	void set_prop_based_on_string_name(std::string name, std::string value);
 
+	void set_directory_name(std::string str);
+
 	//Getters
 
 	std::string get_name() const;
@@ -64,6 +66,8 @@ public:
 	std::string get_pesel() const;
 
 	std::string get_gender() const;
+
+	std::string get_directory_name() const;
 
 	Illness get_illness_from_on_going(int i) const;
 

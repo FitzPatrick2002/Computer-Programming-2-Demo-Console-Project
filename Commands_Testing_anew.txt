@@ -1,0 +1,92 @@
+Command list
+Switches combinations:
+none // Lists ass data of all patients
+-a // Lists all data of all patients
+-a -order // Lists all data of all patients in order specified
+-a -prop // Lists only specified peoperties of all patients
+-a -order -prop // Lists specified properties of patients that are sorter in specified order
+
+-i -prop
+-i -r
+
+Switches functionalities:
+-a : nothing (just a visual appearance)
+-order "asc/desc" "by what property: age, name, second_name, pesel, gender"
+-prop "name age gender pesel second_name"
+-i "pesel" : print data of only a specific patient
+-r "title: --- author: --- date: --- illness: ---" -> matches reports of that specific patient that fullfill all the specified requirements. Date should be in a form: 23-05-1999
+
+
+#####################################################################
+
+Issues:
+list -a -order desc -> invalid comparator
+list -a -prop second_name -> two-stage names are glued together (AlexanderBerthier)
+list -a -order desc age name -prop name second_name age -> invalid comparator error
+list -a -order asc gender -prop name -> invalid comparator
+
+____________________________________________________________________________________
+Command: add
+Switches combinations:
+
+-p
+-i -il // Add new illness
+-i -ar // Add new report to an illness
+-i -oil // oil is responsible for obtaining a pointer to illness
+// It isn;t yet implemented. I wanted that adding a new duration period to an illness was available. Not gonna happen...
+
+Switches functionalities:
+
+-p : info for the program that we are adding a patient
+-i "pesel" : select a specific patient
+
+-il "name: ---" "time: ---" : time should be in a form: dd.mm.yyyy-dd.mm.yyyy or dd.mm.yyyyy-- if the illness is still ongoing
+
+-ar "title: -- date: -- author: -- illness: --" : date should be in a form of dd.mm.yyyy
+
+#######################################################################
+Issues:
+add -p -> Performs well only after termination it prints "User Input" twice
+add -i 71032094968 -il name: Ebola time: 19.06.1999-- -> produces 'cured' value for the illness General.txt
+
+_______________________________________________________________________________
+Command: change
+Switches combinations:
+
+-i -prop "name" "second_name" "gender" "pesel" "age" // Change specified data
+-i -r // Change data of a specified report. -r takes the same stuff _or none) as in the list command
+
+Switches functionalities:
+
+-i "pesel" : selects a specific patient
+-prop : selects a list of properties that are to be changed
+-r "title: --- author: --- date: --- illness: ---" : selects a report
+
+
+###########################################################################
+Issues:
+change -i 71032094968 -prop name second_name gender -> We get double "User Input:" at the end
+change -i 71032094968 -r -> contents get deleted after '-'
+
+__________________________________________________________________________________
+Command delete:
+Switches combination:
+
+delete -i "pesel" // deltes patient wit hspecified pesel
+
+Switches functionalities:
+
+-i "pesel" : selects a specific patient
+##############################################################################
+Issues:
+Too bored to test :)
+But I implemented it yesterday so it should be okay...
+
+
+
+
+
+
+
+
+
